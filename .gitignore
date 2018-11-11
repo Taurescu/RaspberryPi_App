@@ -1,7 +1,7 @@
 #Directories
-*.vs/
-*.bin/
-*.bin-int/
+Pi_Server/.vs/
+Pi_Server/bin/
+Pi_Server/bin-int/
 
 #Files
 *.user
