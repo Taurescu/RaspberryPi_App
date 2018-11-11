@@ -1,1 +1,2 @@
-﻿E:\Repo\RaspberryPi\Pi_Server\Sandbox\Sandbox.vcxproj : error MSB4057: The target "Deploy" does not exist in the project.
+﻿  SandboxApp.cpp
+  Sandbox.vcxproj -> E:\Repo\RaspberryPi\Pi_Server\bin\Debug-Win32\Sandbox\Sandbox.exe
