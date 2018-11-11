@@ -11,14 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Pi_Server\Log.h" />
     <ClInclude Include="src\Pi_Server\EntryPoint.h" />
     <ClInclude Include="src\Pi_Server\Server.h" />
     <ClInclude Include="src\Pi_Server\Core.h" />
     <ClInclude Include="src\TCP.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Pi_Server\Log.cpp" />
     <ClCompile Include="src\Pi_Server\Server.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -68,7 +66,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>PIS_PLATFORM_WINDOWS;PIS_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Pi_Server\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +77,6 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>PIS_PLATFORM_WINDOWS;PIS_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Pi_Server\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

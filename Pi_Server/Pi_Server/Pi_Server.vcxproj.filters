@@ -27,15 +27,9 @@
     <ClInclude Include="src\Pi_Server\EntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Pi_Server\Log.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Pi_Server\Server.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Pi_Server\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
