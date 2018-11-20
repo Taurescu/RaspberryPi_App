@@ -12,12 +12,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Pi_Server\EntryPoint.h" />
+    <ClInclude Include="src\Pi_Server\Log.h" />
     <ClInclude Include="src\Pi_Server\Server.h" />
     <ClInclude Include="src\Pi_Server\Core.h" />
     <ClInclude Include="src\TCP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Pi_Server\Log.cpp" />
     <ClCompile Include="src\Pi_Server\Server.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bin\Debug-Win32\Pi_Server\Pi_Server.dll" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

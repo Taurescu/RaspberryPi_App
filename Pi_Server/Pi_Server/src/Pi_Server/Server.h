@@ -13,5 +13,5 @@ namespace PIS {
 	};
 
 	//To be defined in client
-	Server* CreateServer();
+	Server* CreateServer(void);
 }
