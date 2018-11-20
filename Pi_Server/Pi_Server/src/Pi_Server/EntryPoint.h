@@ -8,8 +8,8 @@ int main(int argc, char **argv)
 {
 	PIS::Log::Init();
 
-	PIS_WARN("TEST");
-	PIS_INFO("INFO");
+	PIS_WARN("SERVER");
+	PIS_INFO("TESTING");
 
 	auto app = PIS::CreateServer();
 	app->Run();
