@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "Core.h"
-#include ".../vendor/spdlog/spdlog.h"
+#include "spdlog\spdlog.h"
 
 namespace PIS {
 
