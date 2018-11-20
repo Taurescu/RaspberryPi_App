@@ -1,0 +1,3 @@
+[submodule "Pi_Server/Pi_Server/vendor/spdlog"]
+	path = Pi_Server/Pi_Server/vendor/spdlog
+	url = https://github.com/gabime/spdlog
