@@ -16,13 +16,13 @@ int main(int argc, char **argv)
 	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	servaddr.sin_port = htons(13);
 
-	Bind(listenfd, sockaddr &servaddr, sizeof(servaddr));
+	Bind(listenfd,(const SA*) &servaddr, sizeof(servaddr));
 
 	Listen(listenfd, LISTENQ);
 
 	while (1)
 	{
-		connfd = Accept(listenfd, sockaddr* NULL, NULL);
+		connfd = Accept(listenfd, (SA*) NULL, NULL);
 
 		ticks = time(NULL);
 		snprintf(buff, sizeof(buff), "%.24s \r\n", ctime(&ticks));
