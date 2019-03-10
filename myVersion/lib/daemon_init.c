@@ -11,7 +11,7 @@ daemon_init(const char *pname, int facility)
 	int		i;
 	pid_t	pid;
 
-	if ( (pid = Fork()) < 0)
+	if ( (pid = fork()) < 0)
 		return (-1);
 	else if (pid)
 		_exit(0);			/* parent terminates */
@@ -21,8 +21,8 @@ daemon_init(const char *pname, int facility)
 	if (setsid() < 0)			/* become session leader */
 		return (-1);
 
-	Signal(SIGHUP, SIG_IGN);
-	if ( (pid = Fork()) < 0)
+	signal(SIGHUP, SIG_IGN);
+	if ( (pid = fork()) < 0)
 		return (-1);
 	else if (pid)
 		_exit(0);			/* child 1 terminates */

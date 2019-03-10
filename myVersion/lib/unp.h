@@ -3,25 +3,32 @@
 
 #include	<sys/types.h>	/* basic system data types */
 #include	<sys/socket.h>	/* basic socket definitions */
+#include	<sys/time.h>	/* timeval{} for select() */
+#include	<time.h>		/* timespec{} for pselect() */
+#include	<sys/time.h>	/* includes <time.h> unsafely */
+#include	<time.h>		/* old system? */
 #include	<netinet/in.h>	/* sockaddr_in{} and other Internet defns */
 #include	<arpa/inet.h>	/* inet(3) functions */
 #include	<errno.h>
 #include	<fcntl.h>		/* for nonblocking */
 #include	<netdb.h>
-
+#include	<signal.h>
+#include	<stdio.h>
+#include	<stdlib.h>
+#include	<string.h>
+#include	<sys/stat.h>	/* for S_xxx file mode constants */
+#include	<sys/uio.h>		/* for iovec{} and readv/writev */
+#include	<unistd.h>
+#include	<sys/wait.h>
 #include	<sys/un.h>		/* for Unix domain sockets */
+#include	<sys/select.h>	/* for convenience */
+#include	<sys/param.h>	/* OpenBSD prereq for sysctl.h */
+#include	<sys/sysctl.h>
+#include	<poll.h>		/* for convenience */
+#include	<strings.h>		/* for convenience */
+#include	<sys/ioctl.h>
+#include	<pthread.h>
 
-#ifdef	HAVE_POLL_H
-# include	<poll.h>		/* for convenience */
-#endif
-
-#ifdef	HAVE_SYS_EVENT_H
-# include	<sys/event.h>	/* for kqueue */
-#endif
-
-#ifdef	HAVE_STRINGS_H
-# include	<strings.h>		/* for convenience */
-#endif
 
 #ifndef	INADDR_NONE
 /* $$.Ic INADDR_NONE$$ */
@@ -74,32 +81,30 @@
 #define min(a,b)  ((a) < (b)) ? (a) : (b)
 #define max(a,b)  ((a) > (b)) ? (a) : (b)
 
-#define SA struct sockaddr
-
 			/* prototypes for our own library functions */
 
 int	     daemon_init(const char *, int);
 
 /* prototypes for our Unix wrapper functions: see {Sec errors} */
 
-void	 Close(int);
-ssize_t	 Read(int, void *, size_t);
-void	 Write(int, void *, size_t);
+void	 Close(int fd);
+ssize_t	 Read(int fd, void * ptr, size_t nbytes);
+void	 Write(int fd, void *ptr, size_t nbytes);
 
 /* prototypes for our socket wrapper functions: see {Sec errors} */
-int		 Accept(int, SA *, socklen_t *);
-void	 Bind(int, const SA *, socklen_t);
-void	 Connect(int, const SA *, socklen_t);
-void	 Listen(int, int);
-void	 Send(int, const void *, size_t, int);
-int		 Socket(int, int, int);
+int		 Accept(int fd, struct sockaddr *sa, socklen_t *salenptr);
+void	 Bind(int fd, struct sockaddr* sa, socklen_t salen);
+void	 Connect(int fd, struct sockaddr *sa, socklen_t salen);
+void	 Listen(int fd, int backlog);
+void	 Send(int fd, const void *, size_t, int);
+int		 Socket(int family, int type, int protocol);
 
 
-void	 err_dump(const char *, ...);
-void	 err_msg(const char *, ...);
-void	 err_quit(const char *, ...);
-void	 err_ret(const char *, ...);
-void	 err_sys(const char *, ...);
+void	 err_dump(const char *message, ...);
+void	 err_msg(const char *message, ...);
+void	 err_quit(const char *message, ...);
+void	 err_ret(const char *message, ...);
+void	 err_sys(const char *message, ...);
 
 
 

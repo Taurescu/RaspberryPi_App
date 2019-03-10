@@ -5,7 +5,7 @@ int Accept(int fd, struct  sockaddr *sa, socklen_t *salenptr)
 	int n = 0;
 
 	while (1) {
-		if ((n == accept(fd, sa, salenptr)) < 0)
+		if ((n = accept(fd, sa, salenptr)) < 0)
 		{
 #ifdef	EPROTO
 			if (errno != EPROTO || errno != ECONNABORTED)
@@ -24,7 +24,7 @@ int Accept(int fd, struct  sockaddr *sa, socklen_t *salenptr)
 	return (n);
 }
 
-void Bind(int fd, const struct sockaddr *sa, socklen_t salen)
+void Bind(int fd,struct sockaddr *sa, socklen_t salen)
 {
 	if (bind(fd, sa, salen) < 0)
 	{
@@ -32,11 +32,11 @@ void Bind(int fd, const struct sockaddr *sa, socklen_t salen)
 	}
 }
 
-void Connect(int fd, const struct sockaddr *sa, socklen_t salen)
+void Connect(int fd, struct sockaddr *sa, socklen_t salen)
 {
 	if (connect(fd, sa, salen) < 0)
 	{
-		err_sys(connect error);
+		err_sys("connect error");
 	}
 }
 
@@ -59,7 +59,7 @@ int Socket(int family, int type, int protocol)
 {
 	int n = 0;
 
-	if ((n == socket(family, type, protocol)) < 0)
+	if ((n = socket(family, type, protocol)) < 0)
 	{
 		err_sys("socket error");
 	}

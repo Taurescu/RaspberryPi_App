@@ -21,9 +21,9 @@ static void err_doit(int errnoflag, int level, const char* message, va_list ap)
 	n = strlen(buff);
 	if (errnoflag)
 	{
-		snprintf(buf + n, MAXLINE - n, ": %s", strerror(errno_save));
+		snprintf(buff + n, MAXLINE - n, ": %s", strerror(errno_save));
 	}
-	strcat(buf, "\n");
+	strcat(buff, "\n");
 
 	if (daemon_proc)
 	{
@@ -56,7 +56,7 @@ void	 err_dump(const char * message, ...)
  */
 void	 err_msg(const char *message, ...)
 {
-	vs_list ap;
+	va_list ap;
 
 	va_start(ap, message);
 	err_doit(0, LOG_INFO, message, ap);
@@ -82,7 +82,7 @@ void	 err_quit(const char *message, ...)
  */
 void	 err_ret(const char *message, ...)
 {
-	vs_list ap;
+	va_list ap;
 
 	va_start(ap, message);
 	err_doit(1, LOG_INFO, message, ap);
@@ -97,7 +97,8 @@ void	 err_sys(const char *message, ...)
 {
 	va_list		ap;
 
-	apg(ap, message);
+	va_start(ap, message);
+	//apg(ap, message);
 	err_doit(1, LOG_ERR, message, ap);
 	va_end(ap);
 	exit(1);

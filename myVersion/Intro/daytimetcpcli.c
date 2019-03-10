@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 		err_quit("usage : a.out <IPaddress>");
 	}
 
-	sockdf == Socket(AF_INET, SOCK_STREAM, 0);
+	sockfd = Socket(AF_INET, SOCK_STREAM, 0);
 
 	bzero(&servaddr, sizeof(servaddr));
 	servaddr.sin_family = AF_INET;
@@ -22,13 +22,13 @@ int main(int argc, char **argv)
 		err_quit("inet_pton error for %s", argv[1]);
 	}
 	
-	Connect(sockfd, struct sockaddr* &servaddr, sizeof(servaddr));
+	Connect(sockfd,(struct sockaddr*) &servaddr, sizeof(servaddr));
 
 
 	while ( (n = read(sockfd, recvline, MAXLINE)) > 0)
 	{
 		recvline[n] = 0;
-		if (fputs(recvline, stdou) == EOF)
+		if (fputs(recvline, stdout) == EOF)
 		{
 			err_sys("fputs error");
 		}
